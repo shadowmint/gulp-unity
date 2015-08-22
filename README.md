@@ -12,11 +12,13 @@ $ npm install --save-dev shadowmint/gulp-unity
 
 ## Usage
 
+Look at the 'demo' folder.
+
 Pass in a single file from the root folder of the project.
 
 
 ```js
-var unity = require('../index');
+var unity = require('gulp-unity');
 var gulp = require('gulp');
 
 gulp.task('default', function(callback) {
