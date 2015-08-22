@@ -16,7 +16,7 @@ gulp.task('tests', function() {
 // Compile ES6 scripts using bable and combine
 gulp.task('scripts', function() {
   return gulp.src('./src/**/*.js')
-    .pipe(babel())
+    .pipe(babel({ optional: ["runtime"] }))
     .pipe(gulp.dest('./build'));
 });
 

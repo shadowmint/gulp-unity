@@ -19,7 +19,9 @@
     "gulp-util": "^3.0.0",
     "through2": "^0.6.1",
     "vinyl": "^0.4.6",
-    "gulp-tools": "shadowmint/gulp-tools#0.0.2"
+    "gulp-tools": "shadowmint/gulp-tools#0.0.3",
+    "tmp": "0.0.27",
+    "babel-runtime": "~5.8.20"
   },
   "devDependencies": {
     "gulp": "^3.9.0",

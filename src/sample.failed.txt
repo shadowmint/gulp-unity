@@ -1,0 +1,273 @@
+
+LICENSE SYSTEM [2015822 21:55:49] No start/stop license dates set
+
+LICENSE SYSTEM [2015822 21:55:49] Next license update check is after 2015-05-31T10:55:50
+
+Built from '5.1/release' branch; Version is '5.1.1f1 (2046fc06d4d8) revision 2115324'; Using compiler version '160040219'
+OS: 'Windows 7 Service Pack 1 (6.1.7601) 64bit' Language: 'en' Physical Memory: 8059 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Editor/Data/Mono/lib/mono/2.0'
+Mono path[2] = 'C:/Program Files/Unity/Editor/Data/UnityScript'
+Mono config path = 'C:/Program Files/Unity/Editor/Data/Mono/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,defer=y
+
+ BATCHMODE ARGUMENTS:
+
+-batchmode
+-quit
+-logFile
+C:\Users\doug\AppData\Local\Temp\tmp-3712b3QpTXZyIzQ9\output.txt
+-projectPath
+c:\projects\unity\gulp-unity\demo\project\
+-executeMethod
+null
+Successfully changed project path to: c:\projects\unity\gulp-unity\demo\project\
+C:/projects/unity/gulp-unity/demo/project
+Loading GUID <-> Path mappings...0.000288 seconds
+Loading Asset Database...0.005273 seconds
+AssetDatabase consistency checks...0.048004 seconds
+Initialize engine version: 5.1.1f1 (2046fc06d4d8)
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: Intel(R) HD Graphics 4000 (ID=0x166)
+    Vendor:   Intel
+    VRAM:     128 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Program Files\Unity\Editor\Data\Managed\UnityEngine.dll (this message is harmless)
+Platform assembly: C:\Program Files\Unity\Editor\Data\Managed\UnityEditor.dll (this message is harmless)
+Platform assembly: C:\Program Files\Unity\Editor\Data\Managed\Unity.Locator.dll (this message is harmless)
+Refreshing native plugins compatible for Editor in 0.42 ms, found 0 plugins.
+Platform assembly: C:\Program Files\Unity\Editor\Data\Mono\lib\mono\2.0\I18N.dll (this message is harmless)
+Platform assembly: C:\Program Files\Unity\Editor\Data\Mono\lib\mono\2.0\I18N.West.dll (this message is harmless)
+Platform assembly: C:\Program Files\Unity\Editor\Data\Managed\Unity.DataContract.dll (this message is harmless)
+Platform assembly: C:\Program Files\Unity\Editor\Data\Mono\lib\mono\2.0\System.Core.dll (this message is harmless)
+Platform assembly: C:\Program Files\Unity\Editor\Data\Managed\Unity.IvyParser.dll (this message is harmless)
+Platform assembly: C:\Program Files\Unity\Editor\Data\Mono\lib\mono\2.0\System.dll (this message is harmless)
+Platform assembly: C:\Program Files\Unity\Editor\Data\Mono\lib\mono\2.0\System.Xml.dll (this message is harmless)
+Platform assembly: C:\Program Files\Unity\Editor\Data\Mono\lib\mono\2.0\System.Configuration.dll (this message is harmless)
+Platform assembly: C:\Program Files\Unity\Editor\Data\PackageManager\Unity\PackageManager\5.1.1\Unity.PackageManager.dll (this message is harmless)
+Initializing Unity.PackageManager (PackageManager) v5.1.1 for Unity v5.1.1f1
+Setting Android v5.1.1 for Unity v5.1.1f1 to C:\Program Files\Unity\Editor\Data\PlaybackEngines\androidplayer
+Setting BlackBerry v5.1.1 for Unity v5.1.1f1 to C:\Program Files\Unity\Editor\Data\PlaybackEngines\blackberryplayer
+Setting BB10 v5.1.1 for Unity v5.1.1f1 to C:\Program Files\Unity\Editor\Data\PlaybackEngines\iossupport
+Setting StandaloneLinux v5.1.1 for Unity v5.1.1f1 to C:\Program Files\Unity\Editor\Data\PlaybackEngines\linuxstandalonesupport
+Setting StandaloneOSXIntel v5.1.1 for Unity v5.1.1f1 to C:\Program Files\Unity\Editor\Data\PlaybackEngines\macstandalonesupport
+Setting WSAPlayer v5.1.1 for Unity v5.1.1f1 to C:\Program Files\Unity\Editor\Data\PlaybackEngines\metrosupport
+Setting SamsungTV v5.1.1 for Unity v5.1.1f1 to C:\Program Files\Unity\Editor\Data\PlaybackEngines\stvplayer\STVPlayer
+Setting WebGL v5.1.1 for Unity v5.1.1f1 to C:\Program Files\Unity\Editor\Data\PlaybackEngines\webglsupport
+Setting StandaloneWindows v5.1.1 for Unity v5.1.1f1 to C:\Program Files\Unity\Editor\Data\PlaybackEngines\windowsstandalonesupport
+Setting WP8Player v5.1.1 for Unity v5.1.1f1 to C:\Program Files\Unity\Editor\Data\PlaybackEngines\wp8support
+Setting GUISystem v5.1.1 for Unity v5.1.1f1 to C:\Program Files\Unity\Editor\Data\UnityExtensions\Unity\GUISystem
+Setting UNetHLAPI v5.1.1 for Unity v5.1.1f1 to C:\Program Files\Unity\Editor\Data\UnityExtensions\Unity\Networking
+Setting UnityAnalytics v5.1.1 for Unity v5.1.1f1 to C:\Program Files\Unity\Editor\Data\UnityExtensions\Unity\UnityAnalytics
+Setting IL2CPP v0.10.1 for Unity v5.1.1f1 to C:\Program Files\Unity\Editor\Data\il2cpp
+Registering custom dll's ...
+Register platform support module: C:\Program Files\Unity\Editor\Data\PlaybackEngines\androidplayer/UnityEditor.Android.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
+Register platform support module: C:\Program Files\Unity\Editor\Data\PlaybackEngines\wp8support/UnityEditor.WP8.Extensions.dll
+Register platform support module: C:\Program Files\Unity\Editor\Data\PlaybackEngines\metrosupport/UnityEditor.Metro.Extensions.dll
+Register platform support module: C:\Program Files\Unity\Editor\Data\PlaybackEngines\blackberryplayer/UnityEditor.BB10.Extensions.dll
+Register platform support module: C:\Program Files\Unity\Editor\Data\PlaybackEngines\stvplayer\STVPlayer/UnityEditor.SamsungTV.Extensions.dll
+Register platform support module: C:\Program Files\Unity\Editor\Data\PlaybackEngines\webglsupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:\Program Files\Unity\Editor\Data\PlaybackEngines\linuxstandalonesupport/UnityEditor.LinuxStandalone.Extensions.dll
+Register platform support module: C:\Program Files\Unity\Editor\Data\PlaybackEngines\windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll
+Register platform support module: C:\Program Files\Unity\Editor\Data\PlaybackEngines\macstandalonesupport/UnityEditor.OSXStandalone.Extensions.dll
+Registered in 0.005642 seconds.
+Platform assembly: C:\Program Files\Unity\Editor\Data\PackageManager\Unity\PackageManager\5.1.1\Unity.PackageManager.dll (this message is harmless)
+Loading C:\Program Files\Unity\Editor\Data\PackageManager\Unity\PackageManager\5.1.1\Unity.PackageManager.dll into Unity Child Domain
+Non platform assembly: C:\Program Files\Unity\Editor\Data\UnityExtensions\Unity\GUISystem\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Program Files\Unity\Editor\Data\UnityExtensions\Unity\GUISystem\UnityEngine.UI.dll into Unity Child Domain
+Non platform assembly: C:\Program Files\Unity\Editor\Data\UnityExtensions\Unity\GUISystem\Editor\UnityEditor.UI.dll (this message is harmless)
+Loading C:\Program Files\Unity\Editor\Data\UnityExtensions\Unity\GUISystem\Editor\UnityEditor.UI.dll into Unity Child Domain
+Non platform assembly: C:\Program Files\Unity\Editor\Data\UnityExtensions\Unity\Networking\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Program Files\Unity\Editor\Data\UnityExtensions\Unity\Networking\UnityEngine.Networking.dll into Unity Child Domain
+Non platform assembly: C:\Program Files\Unity\Editor\Data\UnityExtensions\Unity\Networking\Editor\UnityEditor.Networking.dll (this message is harmless)
+Loading C:\Program Files\Unity\Editor\Data\UnityExtensions\Unity\Networking\Editor\UnityEditor.Networking.dll into Unity Child Domain
+Non platform assembly: C:\Program Files\Unity\Editor\Data\UnityExtensions\Unity\UnityAnalytics\UnityEngine.Analytics.dll (this message is harmless)
+Loading C:\Program Files\Unity\Editor\Data\UnityExtensions\Unity\UnityAnalytics\UnityEngine.Analytics.dll into Unity Child Domain
+Platform assembly: C:\Program Files\Unity\Editor\Data\Managed\UnityEditor.Graphs.dll (this message is harmless)
+Loading C:\Program Files\Unity\Editor\Data\Managed\UnityEditor.Graphs.dll into Unity Child Domain
+Platform assembly: C:\Program Files\Unity\Editor\Data\PlaybackEngines\androidplayer\UnityEditor.Android.Extensions.dll (this message is harmless)
+Loading C:\Program Files\Unity\Editor\Data\PlaybackEngines\androidplayer\UnityEditor.Android.Extensions.dll into Unity Child Domain
+Non platform assembly: C:\Program Files\Unity\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.dll (this message is harmless)
+Loading C:\Program Files\Unity\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.dll into Unity Child Domain
+Platform assembly: C:\Program Files\Unity\Editor\Data\PlaybackEngines\wp8support\UnityEditor.WP8.Extensions.dll (this message is harmless)
+Loading C:\Program Files\Unity\Editor\Data\PlaybackEngines\wp8support\UnityEditor.WP8.Extensions.dll into Unity Child Domain
+Platform assembly: C:\Program Files\Unity\Editor\Data\PlaybackEngines\metrosupport\UnityEditor.Metro.Extensions.dll (this message is harmless)
+Loading C:\Program Files\Unity\Editor\Data\PlaybackEngines\metrosupport\UnityEditor.Metro.Extensions.dll into Unity Child Domain
+Platform assembly: C:\Program Files\Unity\Editor\Data\PlaybackEngines\blackberryplayer\UnityEditor.BB10.Extensions.dll (this message is harmless)
+Loading C:\Program Files\Unity\Editor\Data\PlaybackEngines\blackberryplayer\UnityEditor.BB10.Extensions.dll into Unity Child Domain
+Platform assembly: C:\Program Files\Unity\Editor\Data\PlaybackEngines\stvplayer\STVPlayer\UnityEditor.SamsungTV.Extensions.dll (this message is harmless)
+Loading C:\Program Files\Unity\Editor\Data\PlaybackEngines\stvplayer\STVPlayer\UnityEditor.SamsungTV.Extensions.dll into Unity Child Domain
+Platform assembly: C:\Program Files\Unity\Editor\Data\PlaybackEngines\webglsupport\UnityEditor.WebGL.Extensions.dll (this message is harmless)
+Loading C:\Program Files\Unity\Editor\Data\PlaybackEngines\webglsupport\UnityEditor.WebGL.Extensions.dll into Unity Child Domain
+Platform assembly: C:\Program Files\Unity\Editor\Data\PlaybackEngines\linuxstandalonesupport\UnityEditor.LinuxStandalone.Extensions.dll (this message is harmless)
+Loading C:\Program Files\Unity\Editor\Data\PlaybackEngines\linuxstandalonesupport\UnityEditor.LinuxStandalone.Extensions.dll into Unity Child Domain
+Platform assembly: C:\Program Files\Unity\Editor\Data\PlaybackEngines\windowsstandalonesupport\UnityEditor.WindowsStandalone.Extensions.dll (this message is harmless)
+Loading C:\Program Files\Unity\Editor\Data\PlaybackEngines\windowsstandalonesupport\UnityEditor.WindowsStandalone.Extensions.dll into Unity Child Domain
+Platform assembly: C:\Program Files\Unity\Editor\Data\PlaybackEngines\macstandalonesupport\UnityEditor.OSXStandalone.Extensions.dll (this message is harmless)
+Loading C:\Program Files\Unity\Editor\Data\PlaybackEngines\macstandalonesupport\UnityEditor.OSXStandalone.Extensions.dll into Unity Child Domain
+Refreshing native plugins compatible for Editor in 0.06 ms, found 0 plugins.
+Platform assembly: C:\Program Files\Unity\Editor\Data\Managed\Mono.Cecil.dll (this message is harmless)
+Platform assembly: C:\Program Files\Unity\Editor\Data\Managed\Unity.SerializationLogic.dll (this message is harmless)
+Platform assembly: C:\Program Files\Unity\Editor\Data\Mono\lib\mono\2.0\UnityScript.dll (this message is harmless)
+Platform assembly: C:\Program Files\Unity\Editor\Data\Managed\ICSharpCode.NRefactory.dll (this message is harmless)
+Non platform assembly: C:\Program Files\Unity\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll (this message is harmless)
+Platform assembly: C:\Program Files\Unity\Editor\Data\Mono\lib\mono\2.0\System.Xml.Linq.dll (this message is harmless)
+Mono: successfully reloaded assembly
+- Completed reload, in  0.747 seconds
+Registering platform support modules:
+Platform assembly: C:\Program Files\Unity\Editor\Data\Mono\lib\mono\2.0\Boo.Lang.Compiler.dll (this message is harmless)
+Platform assembly: C:\Program Files\Unity\Editor\Data\Mono\lib\mono\2.0\Boo.Lang.dll (this message is harmless)
+Platform assembly: C:\Program Files\Unity\Editor\Data\Mono\lib\mono\2.0\Boo.Lang.Parser.dll (this message is harmless)
+Platform assembly: C:\Program Files\Unity\Editor\Data\Mono\lib\mono\2.0\UnityScript.Lang.dll (this message is harmless)
+Platform assembly: C:\Program Files\Unity\Editor\Data\Mono\lib\mono\2.0\Mono.Security.dll (this message is harmless)
+Registered platform support modules in: 0.1054594s.
+Native extension for OSXStandalone target not found
+Native extension for WindowsStandalone target not found
+Native extension for LinuxStandalone target not found
+Native extension for WebGL target not found
+Native extension for SamsungTV target not found
+Native extension for BlackBerry target not found
+Load native extension module: C:\Program Files\Unity\Editor\Data\PlaybackEngines\metrosupport/x86_64/UnityEditor.Metro.Extensions.Native.dll
+Load native extension module: C:\Program Files\Unity\Editor\Data\PlaybackEngines\wp8support/x86_64/UnityEditor.WP8.Extensions.Native.dll
+Load native extension module: C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/x86_64/UnityEditor.iOS.Extensions.Native.dll
+[usbmuxd] Start listen thread
+[usbmuxd] Listen thread started
+[usbmuxd] Send listen message
+Native extension for Android target not found
+- starting compile Library/ScriptAssemblies/Assembly-CSharp.dll, for buildtarget 5
+
+-----Compiler Commandline Arguments:
+Filename: "C:\Program Files\Unity\Editor\Data\Mono\bin\mono.exe"
+Arguments: "C:\Program Files\Unity\Editor\Data\Mono\lib\mono\unity\smcs.exe"  @Temp/UnityTempFile-fd419fe26c2c1b549aa640da7c03b573
+MONO_PATH: C:\Program Files\Unity\Editor\Data\Mono\lib\mono\unity
+MONO_CFG_DIR: C:\Program Files\Unity\Editor\Data\Mono\etc
+index: 68
+Responsefile: Temp/UnityTempFile-fd419fe26c2c1b549aa640da7c03b573 Contents: 
+-debug
+-target:library
+-nowarn:0169
+-out:Temp/Assembly-CSharp.dll
+-r:"C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll"
+-r:"C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll"
+-r:"C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll"
+-r:"C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll"
+-r:"C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll"
+-r:"C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll"
+-define:UNITY_5_1_1
+-define:UNITY_5_1
+-define:UNITY_5
+-define:ENABLE_NEW_BUGREPORTER
+-define:ENABLE_2D_PHYSICS
+-define:ENABLE_4_6_FEATURES
+-define:ENABLE_AUDIO
+-define:ENABLE_CACHING
+-define:ENABLE_CLOTH
+-define:ENABLE_DUCK_TYPING
+-define:ENABLE_FRAME_DEBUGGER
+-define:ENABLE_GENERICS
+-define:ENABLE_HOME_SCREEN
+-define:ENABLE_IMAGEEFFECTS
+-define:ENABLE_LIGHT_PROBES_LEGACY
+-define:ENABLE_MICROPHONE
+-define:ENABLE_MULTIPLE_DISPLAYS
+-define:ENABLE_PHYSICS
+-define:ENABLE_PHYSICS_PHYSX3
+-define:ENABLE_PLUGIN_INSPECTOR
+-define:ENABLE_SHADOWS
+-define:ENABLE_SINGLE_INSTANCE_BUILD_SETTING
+-define:ENABLE_SPRITES
+-define:ENABLE_TERRAIN
+-define:ENABLE_UNET
+-define:ENABLE_UNITYEVENTS
+-define:ENABLE_VR
+-define:ENABLE_WEBCAM
+-define:ENABLE_WWW
+-define:ENABLE_CLOUD_SERVICES
+-define:ENABLE_CLOUD_SERVICES_ANALYTICS
+-define:ENABLE_CLOUD_SERVICES_UNET
+-define:ENABLE_CLOUD_LICENSE
+-define:ENABLE_AUDIOMIXER_SUSPEND
+-define:ENABLE_EDITOR_METRICS
+-define:INCLUDE_DYNAMIC_GI
+-define:INCLUDE_GI
+-define:INCLUDE_IL2CPP
+-define:INCLUDE_DIRECTX12
+-define:PLATFORM_SUPPORTS_MONO
+-define:RENDER_SOFTWARE_CURSOR
+-define:ENABLE_LOCALIZATION
+-define:UNITY_STANDALONE_WIN
+-define:UNITY_STANDALONE
+-define:ENABLE_SUBSTANCE
+-define:ENABLE_TEXTUREID_MAP
+-define:ENABLE_RUNTIME_GI
+-define:ENABLE_MOVIES
+-define:ENABLE_NETWORK
+-define:ENABLE_CRUNCH_TEXTURE_COMPRESSION
+-define:ENABLE_WEBSOCKET_HOST
+-define:ENABLE_MONO
+-define:ENABLE_PROFILER
+-define:DEBUG
+-define:TRACE
+-define:UNITY_ASSERTIONS
+-define:UNITY_EDITOR
+-define:UNITY_EDITOR_64
+-define:UNITY_EDITOR_WIN
+Assets/Sample.cs
+Assets/Test.cs
+Assets/TestRunner.cs
+Assets/TestSuite.cs
+-r:"C:\Program Files\Unity\Editor\Data\Mono\lib\mono\unity\System.Runtime.Serialization.dll"
+-r:"C:\Program Files\Unity\Editor\Data\Mono\lib\mono\unity\System.Xml.Linq.dll"
+
+-----CompilerOutput:-stdout--exitcode: 1--compilationhadfailure: True--outfile: Temp/Assembly-CSharp.dll
+Compilation failed: 3 error(s), 0 warnings
+-----CompilerOutput:-stderr----------
+Assets/Sample.cs(10,14): error CS0122: `Sample.Foo()' is inaccessible due to its protection level
+Assets/Sample.cs(2,8): (Location of the symbol related to previous error)
+Assets/Sample.cs(10,5): error CS1502: The best overloaded method match for `TestSuite.Assert(bool)' has some invalid arguments
+Assets/TestSuite.cs(45,15): (Location of the symbol related to previous error)
+Assets/Sample.cs(10,5): error CS1503: Argument `#1' cannot convert `object' expression to type `bool'
+-----EndCompilerOutput---------------
+- Finished compile Library/ScriptAssemblies/Assembly-CSharp.dll
+Assets/Sample.cs(10,14): error CS0122: `Sample.Foo()' is inaccessible due to its protection level
+ 
+(Filename: Assets/Sample.cs Line: 10)
+
+Assets/Sample.cs(10,5): error CS1502: The best overloaded method match for `TestSuite.Assert(bool)' has some invalid arguments
+ 
+(Filename: Assets/Sample.cs Line: 10)
+
+Assets/Sample.cs(10,5): error CS1503: Argument `#1' cannot convert `object' expression to type `bool'
+ 
+(Filename: Assets/Sample.cs Line: 10)
+
+Validating Project structure ... 0.000137 seconds.
+Refresh: detecting if any assets need to be imported or removed ... Refresh: elapses 0.001027 seconds (Nothing changed)
+Unloading 32 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 9.0 MB.
+System memory in use after: 9.0 MB.
+
+Unloading 4 unused Assets to reduce memory usage. Loaded Objects now: 403.
+Total: 0.866066 ms (FindLiveObjects: 0.033069 ms CreateObjectMapping: 0.012543 ms MarkObjects: 0.809051 ms  DeleteObjects: 0.009122 ms)
+
+Scripts have compiler errors.
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Utilities/Argv.cpp Line: 152)
+
+
+Aborting batchmode due to failure:
+Scripts have compiler errors.
+
+Symbol file LoadedFromMemory doesn't match image C:\Program Files\Unity\Editor\Data\PlaybackEngines\webglsupport\UnityEditor.WebGL.Extensions.dll
+Symbol file C:\Program Files\Unity\Editor\Data\PlaybackEngines\webglsupport\UnityEditor.WebGL.Extensions.dll.mdb doesn't match image C:\Program Files\Unity\Editor\Data\PlaybackEngines\webglsupport\UnityEditor.WebGL.Extensions.dll
+Symbol file LoadedFromMemory doesn't match image C:\Program Files\Unity\Editor\Data\PlaybackEngines\linuxstandalonesupport\UnityEditor.LinuxStandalone.Extensions.dll
+Symbol file C:\Program Files\Unity\Editor\Data\PlaybackEngines\linuxstandalonesupport\UnityEditor.LinuxStandalone.Extensions.dll.mdb doesn't match image C:\Program Files\Unity\Editor\Data\PlaybackEngines\linuxstandalonesupport\UnityEditor.LinuxStandalone.Extensions.dll
+Symbol file LoadedFromMemory doesn't match image C:\Program Files\Unity\Editor\Data\PlaybackEngines\windowsstandalonesupport\UnityEditor.WindowsStandalone.Extensions.dll
+Symbol file C:\Program Files\Unity\Editor\Data\PlaybackEngines\windowsstandalonesupport\UnityEditor.WindowsStandalone.Extensions.dll.mdb doesn't match image C:\Program Files\Unity\Editor\Data\PlaybackEngines\windowsstandalonesupport\UnityEditor.WindowsStandalone.Extensions.dll
+Symbol file LoadedFromMemory doesn't match image C:\Program Files\Unity\Editor\Data\PlaybackEngines\macstandalonesupport\UnityEditor.OSXStandalone.Extensions.dll
+Symbol file C:\Program Files\Unity\Editor\Data\PlaybackEngines\macstandalonesupport\UnityEditor.OSXStandalone.Extensions.dll.mdb doesn't match image C:\Program Files\Unity\Editor\Data\PlaybackEngines\macstandalonesupport\UnityEditor.OSXStandalone.Extensions.dll

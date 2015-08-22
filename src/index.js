@@ -1,13 +1,17 @@
 import cp from 'child_process';
 import fs from 'fs';
+import path from 'path';
+import tmp from 'tmp';
 import gutil from 'gulp-util';
 import * as sutils from 'gulp-tools/lib/utils';
 import {Plugin} from 'gulp-tools';
 
 class UnityPlugin extends Plugin {
 
-  constructor() {
-    super('gulp-unity');
+  constructor() { super('gulp-unity'); }
+
+  configure(options) {
+    this.options = options ? options : {};
 
     // The set of paths to try to find the unity executable
     this.option('paths', [
@@ -15,15 +19,16 @@ class UnityPlugin extends Plugin {
     ]);
 
     // The method to invoke on the projects.
-    this.option('method', null);
+    this.option('method', null, (v) => {
+      return v != null;
+    });
   }
 
   handle_string(file, value, callback) {
 
     // Look for a valid executable
     var UNITY_PATH = null;
-    for (var i = 0; i < this.options.paths) {
-      console.log("trying: " + this.options.paths[i]);
+    for (var i = 0; i < this.options.paths.length; ++i) {
       if (fs.existsSync(this.options.paths[i])) {
         UNITY_PATH = this.options.paths[i];
         break;
@@ -32,33 +37,24 @@ class UnityPlugin extends Plugin {
 
     // Fail if no valid unity path
     if (!UNITY_PATH) {
-      callback(new gutil.PluginError(self.name, "Unable to find any version of Unity. Is it installed?", {fileName: file.path}));
+      callback(new gutil.PluginError(this.name, "Unable to find any version of Unity. Is it installed?", {fileName: file.path}));
       return;
     }
 
+    // Generate a temporary output file
+    var temp = tmp.dirSync();
+    temp = path.join(temp.name, 'output.txt');
+
     // Configure settings
-    var root = "";
-    var method = "";
-    var args = ['-batchmode', '-quit', '-logFile', '-projectPath', root, '-executeMethod', this.options.method]
+    var root = file.base;
+    var args = ['-batchmode', '-quit', '-logFile', temp, '-projectPath', root, '-executeMethod', this.options.method]
 
     // Spawn a process to invoke unity
     var proc = cp.spawn(UNITY_PATH, args);
-
-    // Read process output and return as an object
-    var failed = false;
-    var self = this;
-    sutils.read_from_stream(proc.stderr, 'utf8', function(value) {
-      if (value) {
-        failed = true;
-        callback(new gutil.PluginError(self.name, value, {fileName: file.path}));
-      }
-    });
-    sutils.read_from_stream(proc.stdout, 'utf8', function(value) {
-      if (value && (!failed)) {
-        file.path = gutil.replaceExtension(file.path, '.css');
-        file.contents = new Buffer(value);
-        callback(null, file);
-      }
+    proc.on('exit', () => {
+      var output = fs.readFileSync(temp).toString('utf-8');
+      file.contents = new Buffer(output);
+      callback(null, file);
     });
   }
 }

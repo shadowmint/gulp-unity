@@ -14,11 +14,23 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var _child_process = require('child_process');
 
 var _child_process2 = _interopRequireDefault(_child_process);
+
+var _fs = require('fs');
+
+var _fs2 = _interopRequireDefault(_fs);
+
+var _path = require('path');
+
+var _path2 = _interopRequireDefault(_path);
+
+var _tmp = require('tmp');
+
+var _tmp2 = _interopRequireDefault(_tmp);
 
 var _gulpUtil = require('gulp-util');
 
@@ -30,46 +42,72 @@ var sutils = _interopRequireWildcard(_gulpToolsLibUtils);
 
 var _gulpTools = require('gulp-tools');
 
-var Sass = (function (_Plugin) {
-  _inherits(Sass, _Plugin);
+var UnityPlugin = (function (_Plugin) {
+  _inherits(UnityPlugin, _Plugin);
 
-  function Sass() {
-    _classCallCheck(this, Sass);
+  function UnityPlugin() {
+    _classCallCheck(this, UnityPlugin);
 
-    _get(Object.getPrototypeOf(Sass.prototype), 'constructor', this).call(this, 'gulp-sass-native');
+    _get(Object.getPrototypeOf(UnityPlugin.prototype), 'constructor', this).call(this, 'gulp-unity');
   }
 
-  _createClass(Sass, [{
+  _createClass(UnityPlugin, [{
+    key: 'configure',
+    value: function configure(options) {
+      this.options = options ? options : {};
+
+      // The set of paths to try to find the unity executable
+      this.option('paths', ['C:\\Program Files\\Unity\\Editor\\Unity.exe']);
+
+      // The method to invoke on the projects.
+      this.option('method', null, function (v) {
+        return v != null;
+      });
+    }
+  }, {
     key: 'handle_string',
     value: function handle_string(file, value, callback) {
-      var isWin = /^win/.test(process.platform);
-      if (isWin) {
-        var sass_process = _child_process2['default'].spawn('ruby', ['C:\\Ruby22-x64\\bin\\sass', '-I.', '-s', '--scss'], { cwd: file.base });
-      } else {
-        var sass_process = _child_process2['default'].spawn('sass', ['-I.', '-s', '--scss'], { cwd: file.base });
+
+      // Look for a valid executable
+      var UNITY_PATH = null;
+      for (var i = 0; i < this.options.paths.length; ++i) {
+        console.log("trying: " + this.options.paths[i]);
+        if (_fs2['default'].existsSync(this.options.paths[i])) {
+          UNITY_PATH = this.options.paths[i];
+          break;
+        }
       }
-      var failed = false;
-      var self = this;
-      sutils.read_from_stream(sass_process.stderr, 'utf8', function (value) {
-        if (value) {
-          failed = true;
-          callback(new _gulpUtil2['default'].PluginError(self.name, value, { fileName: file.path }));
-        }
+
+      // Fail if no valid unity path
+      if (!UNITY_PATH) {
+        callback(new _gulpUtil2['default'].PluginError(this.name, "Unable to find any version of Unity. Is it installed?", { fileName: file.path }));
+        return;
+      }
+
+      // Generate a temporary output file
+      var temp = _tmp2['default'].dirSync();
+      temp = _path2['default'].join(temp.name, 'output.txt');
+
+      // Configure settings
+      console.log("Found unity instance: " + UNITY_PATH);
+      var root = file.base;
+      console.log("Using path: " + root);
+      var args = ['-batchmode', '-quit', '-logFile', temp, '-projectPath', root, '-executeMethod', this.options.method];
+
+      // Spawn a process to invoke unity
+      var proc = _child_process2['default'].spawn(UNITY_PATH, args);
+      proc.on('exit', function () {
+        console.log("Finished");
+        var output = _fs2['default'].readFileSync(temp).toString('utf-8');
+        file.contents = new Buffer(output);
+        callback(null, file);
+        console.log(file.path);
       });
-      sutils.read_from_stream(sass_process.stdout, 'utf8', function (value) {
-        if (value && !failed) {
-          file.path = _gulpUtil2['default'].replaceExtension(file.path, '.css');
-          file.contents = new Buffer(value);
-          callback(null, file);
-        }
-      });
-      sass_process.stdin.write(value);
-      sass_process.stdin.end();
     }
   }]);
 
-  return Sass;
+  return UnityPlugin;
 })(_gulpTools.Plugin);
 
-exports['default'] = new Sass().handler();
+exports['default'] = new UnityPlugin().handler();
 module.exports = exports['default'];
