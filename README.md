@@ -1,23 +1,30 @@
-# gulp-sass-native
+# gulp-unity
 
-Uses the command line sass compiler instead of libsass.
+Uses batchmode to execute a unity task.
+
+Notice that this wont work if unity is already open; just use it for automation.
 
 ## Install
 
 ```
-$ npm install --save-dev shadowmint/gulp-sass-native#0.0.1
+$ npm install --save-dev shadowmint/gulp-unity
 ```
 
 ## Usage
 
-```js
-var gulp = require('gulp');
-var sass = require('gulp-sass-native');
+Pass in a single file from the root folder of the project.
 
-gulp.task('default', function () {
-	return gulp.src('src/*.scss')
-		.pipe(sass())
-		.pipe(gulp.dest('dist'));
+
+```js
+var unity = require('../index');
+var gulp = require('gulp');
+
+gulp.task('default', function(callback) {
+  return gulp.src('./project/README.md')
+    .pipe(unity({
+      method: 'TestRunner.Run'
+    }))
+    .pipe(gulp.dest('./foo'));
 });
 ```
 
