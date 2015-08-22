@@ -1,0 +1,30 @@
+{
+  "name": "gulp-unity",
+  "version": "0.0.1",
+  "description": "Gulp plugin for executing unity tasks",
+  "license": "MIT",
+  "repository": "shadowmint/gulp-unity",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "files": [
+    "index.js",
+    "dist"
+  ],
+  "keywords": [
+    "gulpplugin"
+  ],
+  "dependencies": {
+    "buffertools": "^2.1.2",
+    "gulp-util": "^3.0.0",
+    "through2": "^0.6.1",
+    "vinyl": "^0.4.6",
+    "gulp-tools": "shadowmint/gulp-tools#0.0.2"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.1.0",
+    "gulp-nodeunit": "0.0.5",
+    "run-sequence": "^1.1.1"
+  }
+}
