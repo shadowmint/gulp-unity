@@ -11,6 +11,7 @@ gulp.task('default', function(callback) {
           { pattern: /\!\! Test.*/, color: 'red' },
           { pattern: /\*.*/ },
           { pattern: /^DEBUG:.*/, color: 'yellow', context: 3 },
+          { pattern: /System.Exception/, color: 'red', context: true },
         ])
       }
     }));

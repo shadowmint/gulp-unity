@@ -147,8 +147,13 @@ var UnityPlugin = (function (_Plugin) {
         for (var j = 0; j < patterns.length; ++j) {
           if (record[i].match(patterns[j].pattern)) {
             console.log(patterns[j].color ? record[i][patterns[j].color] : record[i]);
+            if (patterns[j].context === true) {
+              for (var k = i + 1; k < record.length; ++k) {
+                console.log(patterns[j].color ? record[k][patterns[j].color] : record[k]);
+              }
+            }
             if (patterns[j].context) {
-              for (var k = i + 1; k < i + patterns[j].context + 1; ++k) {
+              for (var k = i + 1; k < record.length && k < i + patterns[j].context + 1; ++k) {
                 console.log(patterns[j].color ? record[k][patterns[j].color] : record[k]);
               }
             }
