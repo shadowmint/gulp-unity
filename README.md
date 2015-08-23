@@ -7,7 +7,7 @@ Notice that this wont work if unity is already open; just use it for automation.
 ## Install
 
 ```
-$ npm install --save-dev shadowmint/gulp-unity
+$ npm install --save-dev shadowmint/gulp-unity#0.0.1
 ```
 
 ## Usage
