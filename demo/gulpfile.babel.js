@@ -13,6 +13,5 @@ gulp.task('default', function(callback) {
           { pattern: /^DEBUG:.*/, color: 'yellow', context: 3 },
         ])
       }
-    }))
-    .pipe(gulp.dest('./build'));
+    }));
 });
