@@ -64,6 +64,9 @@ this.option('color', true);
 
 // Do something with debug output lines
 this.option('debug', false);
+
+// Provide an array of additional command line arguments
+this.option('args', null);
 ```
 
 ## License

@@ -29,7 +29,7 @@ class UnityPlugin extends Plugin {
     // Pass additional command line arguments?
     this.option('color', true);
 
-    // Use coloured output?
+    // Additional command line arguments
     this.option('args', null);
 
     // Do something with debug output lines
