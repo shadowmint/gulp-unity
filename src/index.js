@@ -30,7 +30,7 @@ class UnityPlugin extends Plugin {
     this.option('color', true);
 
     // Additional command line arguments
-    this.option('args', null);
+    this.option('args', []);
 
     // Do something with debug output lines
     this.option('debug', false);
@@ -60,7 +60,7 @@ class UnityPlugin extends Plugin {
     // Configure settings
     var root = file.base;
     var args = ['-batchmode', '-quit', '-logFile', temp, '-projectPath', root, '-executeMethod', this.options.method]
-    if (this.options.args) {
+    if (this.options.args.length) {
       args = args.concat(this.options.args);
     }
 
