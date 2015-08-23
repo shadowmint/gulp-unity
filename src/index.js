@@ -26,8 +26,11 @@ class UnityPlugin extends Plugin {
       return v != null;
     });
 
-    // Use coloured output?
+    // Pass additional command line arguments?
     this.option('color', true);
+
+    // Use coloured output?
+    this.option('args', null);
 
     // Do something with debug output lines
     this.option('debug', false);
@@ -57,6 +60,9 @@ class UnityPlugin extends Plugin {
     // Configure settings
     var root = file.base;
     var args = ['-batchmode', '-quit', '-logFile', temp, '-projectPath', root, '-executeMethod', this.options.method]
+    if (this.options.args) {
+      args = args.concat(this.options.args);
+    }
 
     // Spawn a process to invoke unity
     var proc = cp.spawn(UNITY_PATH, args);
