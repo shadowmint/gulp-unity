@@ -48,7 +48,7 @@ public class TestRunner : MonoBehaviour {
   public static void Run(string filter) {
     try {
       // Make output parsable
-      Debug.Log("START TESTS");
+      Debug.Log("* START TESTS");
 
       // Find types
       // If a filter was supplied, use the filter.
@@ -72,7 +72,7 @@ public class TestRunner : MonoBehaviour {
         }
       }
 
-      Debug.Log(DateTime.Now.ToString());
+      Debug.Log(string.Format("* {0}", DateTime.Now.ToString()));
 
       var all = 0;
       for (var i = 0; i < tests.Count; ++i) {
@@ -87,7 +87,12 @@ public class TestRunner : MonoBehaviour {
 
       for (var j = 0; j < tests.Count; ++j) {
         var t = tests[j];
-        Debug.Log("Test: " + t + ": " + t.passed.Count + "/" + t.total);
+        if (t.passed.Count == t.total) {
+          Debug.Log("** Test: " + t + ": " + t.passed.Count + "/" + t.total);
+        }
+        else {
+          Debug.Log("!! Test: " + t + ": " + t.passed.Count + "/" + t.total);
+        }
       }
 
       for (var k = 0; k < tests.Count; ++k) {
@@ -99,7 +104,7 @@ public class TestRunner : MonoBehaviour {
       }
 
       // Make output parsable
-      Debug.Log("END TESTS");
+      Debug.Log("* END TESTS");
     }
     catch(Exception e) {
       Debug.Log(e);

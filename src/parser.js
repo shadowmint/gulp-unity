@@ -56,9 +56,11 @@ export class Parser {
       // Next state, if any?
       if (line.match(this.stdout)) {
         this.state = State.STDOUT;
+        continue;
       }
       else if (line.match(this.stderr)) {
         this.state = State.STDERR;
+        continue;
       }
       else if (line.match(this.end)) {
         this.state = State.NONE;
@@ -78,6 +80,7 @@ export class Parser {
       }
       else if (line.match(this.debug_output_start)) {
         debug_has_started = true;
+        token = [];
       }
 
       // Check for failure

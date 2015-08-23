@@ -1,4 +1,5 @@
 import cp from 'child_process';
+import colors from 'colors';
 import fs from 'fs';
 import path from 'path';
 import tmp from 'tmp';
@@ -16,13 +17,20 @@ class UnityPlugin extends Plugin {
 
     // The set of paths to try to find the unity executable
     this.option('paths', [
-      'C:\\Program Files\\Unity\\Editor\\Unity.exe'
+      'C:\\Program Files\\Unity\\Editor\\Unity.exe',
+      '/Applications/Unity/Unity.app/Contents/MacOS/Unity'
     ]);
 
     // The method to invoke on the projects.
     this.option('method', null, (v) => {
       return v != null;
     });
+
+    // Use coloured output?
+    this.option('color', true);
+
+    // Do something with debug output lines
+    this.option('debug', false);
   }
 
   handle_string(file, value, callback) {
@@ -55,18 +63,56 @@ class UnityPlugin extends Plugin {
     proc.on('exit', () => {
       var output = fs.readFileSync(temp).toString('utf-8');
       var data = new Parser().parse(output);
-      console.log(data);
       if (data.success) {
-        file.contents = new Buffer(json.stringify(data.debug));
+        if (this.options.debug) {
+          for (var i = 0; i < data.debug.length; ++i) {
+            this.options.debug(data.debug[i]);
+          }
+        }
+        file.contents = new Buffer(JSON.stringify(data.debug));
         callback(null, file);
       }
       else {
-        for (var i = 0; i < data.stdout.length; ++i) { console.log(data.stdout[i]); }
-        for (var i = 0; i < data.stderr.length; ++i) { console.log(data.stderr[i]); }
+        for (var i = 0; i < data.stdout.length; ++i) {
+          console.log(this.options.color ? data.stdout[i].yellow : data.stdout[i]);
+        }
+        for (var i = 0; i < data.stderr.length; ++i) {
+          console.log(this.options.color ? data.stderr[i].red : data.stderr[i]);
+        }
         callback(new gutil.PluginError(this.name, "Failed to invoke batch mode", {fileName: file.path}));
       }
     });
   }
+
+  /**
+   * Debugging helper
+   * For each pattern and color pairs in the form: { pattern: /.../, color: 'green' }
+   * If the non-debug info of a debug line matches pattern, log it with color
+   * @param record A debug record
+   * @param patterns An array of {pattern: //, color: ''}
+   */
+  static debug(record, patterns) {
+    var end_of_input = /^UnityEngine.Debug.*/;
+    for (var i = 0; i < record.length; ++i) {
+      if (record[i].match(end_of_input)) {
+        break;
+      }
+      for (var j = 0; j < patterns.length; ++j) {
+        if (record[i].match(patterns[j].pattern)) {
+          console.log(patterns[j].color ? record[i][patterns[j].color] : record[i]);
+          if (patterns[j].context) {
+            for (var k = i + 1; k < (i + patterns[j].context + 1); ++k) {
+              console.log(patterns[j].color ? record[k][patterns[j].color] : record[k]);
+            }
+          }
+          break;
+        }
+      }
+    }
+  }
 }
 
-export default new UnityPlugin().handler();
+var rtn = new UnityPlugin().handler();
+rtn.debug = UnityPlugin.debug;
+
+export default rtn;

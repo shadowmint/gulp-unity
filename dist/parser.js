@@ -76,8 +76,10 @@ var Parser = (function () {
           // Next state, if any?
           if (line.match(this.stdout)) {
             this.state = State.STDOUT;
+            continue;
           } else if (line.match(this.stderr)) {
             this.state = State.STDERR;
+            continue;
           } else if (line.match(this.end)) {
             this.state = State.NONE;
           } else if (line.match(this.debug_start)) {
@@ -93,6 +95,7 @@ var Parser = (function () {
             token = [];
           } else if (line.match(this.debug_output_start)) {
             debug_has_started = true;
+            token = [];
           }
 
           // Check for failure
