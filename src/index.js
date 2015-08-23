@@ -5,6 +5,7 @@ import tmp from 'tmp';
 import gutil from 'gulp-util';
 import * as sutils from 'gulp-tools/lib/utils';
 import {Plugin} from 'gulp-tools';
+import {Parser} from './parser';
 
 class UnityPlugin extends Plugin {
 
@@ -53,8 +54,17 @@ class UnityPlugin extends Plugin {
     var proc = cp.spawn(UNITY_PATH, args);
     proc.on('exit', () => {
       var output = fs.readFileSync(temp).toString('utf-8');
-      file.contents = new Buffer(output);
-      callback(null, file);
+      var data = new Parser().parse(output);
+      console.log(data);
+      if (data.success) {
+        file.contents = new Buffer(json.stringify(data.debug));
+        callback(null, file);
+      }
+      else {
+        for (var i = 0; i < data.stdout.length; ++i) { console.log(data.stdout[i]); }
+        for (var i = 0; i < data.stderr.length; ++i) { console.log(data.stderr[i]); }
+        callback(new gutil.PluginError(this.name, "Failed to invoke batch mode", {fileName: file.path}));
+      }
     });
   }
 }

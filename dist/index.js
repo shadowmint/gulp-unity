@@ -42,6 +42,8 @@ var sutils = _interopRequireWildcard(_gulpToolsLibUtils);
 
 var _gulpTools = require('gulp-tools');
 
+var _parser = require('./parser');
+
 var UnityPlugin = (function (_Plugin) {
   _inherits(UnityPlugin, _Plugin);
 
@@ -67,11 +69,11 @@ var UnityPlugin = (function (_Plugin) {
   }, {
     key: 'handle_string',
     value: function handle_string(file, value, callback) {
+      var _this = this;
 
       // Look for a valid executable
       var UNITY_PATH = null;
       for (var i = 0; i < this.options.paths.length; ++i) {
-        console.log("trying: " + this.options.paths[i]);
         if (_fs2['default'].existsSync(this.options.paths[i])) {
           UNITY_PATH = this.options.paths[i];
           break;
@@ -89,19 +91,27 @@ var UnityPlugin = (function (_Plugin) {
       temp = _path2['default'].join(temp.name, 'output.txt');
 
       // Configure settings
-      console.log("Found unity instance: " + UNITY_PATH);
       var root = file.base;
-      console.log("Using path: " + root);
       var args = ['-batchmode', '-quit', '-logFile', temp, '-projectPath', root, '-executeMethod', this.options.method];
 
       // Spawn a process to invoke unity
       var proc = _child_process2['default'].spawn(UNITY_PATH, args);
       proc.on('exit', function () {
-        console.log("Finished");
         var output = _fs2['default'].readFileSync(temp).toString('utf-8');
-        file.contents = new Buffer(output);
-        callback(null, file);
-        console.log(file.path);
+        var data = new _parser.Parser().parse(output);
+        console.log(data);
+        if (data.success) {
+          file.contents = new Buffer(json.stringify(data.debug));
+          callback(null, file);
+        } else {
+          for (var i = 0; i < data.stdout.length; ++i) {
+            console.log(data.stdout[i]);
+          }
+          for (var i = 0; i < data.stderr.length; ++i) {
+            console.log(data.stderr[i]);
+          }
+          callback(new _gulpUtil2['default'].PluginError(_this.name, "Failed to invoke batch mode", { fileName: file.path }));
+        }
       });
     }
   }]);
