@@ -33,7 +33,9 @@ class UnityPlugin extends Plugin {
     this.option('args', []);
 
     // Do something with debug output lines
-    this.option('debug', false);
+    this.option('debug', false, (v) => {
+      return (v === false) || (typeof(v) === 'function');
+    });
   }
 
   handle_string(file, value, callback) {
@@ -69,6 +71,7 @@ class UnityPlugin extends Plugin {
     proc.on('exit', () => {
       var output = fs.readFileSync(temp).toString('utf-8');
       var data = new Parser().parse(output);
+      data.command = UNITY_PATH + ' ' + args.join(' ');
       if (data.success) {
         if (this.options.debug) {
           for (var i = 0; i < data.debug.length; ++i) {
@@ -85,7 +88,7 @@ class UnityPlugin extends Plugin {
         for (var i = 0; i < data.stderr.length; ++i) {
           console.log(this.options.color ? data.stderr[i].red : data.stderr[i]);
         }
-        callback(new gutil.PluginError(this.name, "Failed to invoke batch mode", {fileName: file.path}));
+        callback(new gutil.PluginError(this.name, `Failed to invoke batch mode: ${data.command}`, {fileName: file.path}));
       }
     });
   }

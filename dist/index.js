@@ -77,7 +77,9 @@ var UnityPlugin = (function (_Plugin) {
       this.option('args', []);
 
       // Do something with debug output lines
-      this.option('debug', false);
+      this.option('debug', false, function (v) {
+        return v === false || typeof v === 'function';
+      });
     }
   }, {
     key: 'handle_string',
@@ -115,6 +117,7 @@ var UnityPlugin = (function (_Plugin) {
       proc.on('exit', function () {
         var output = _fs2['default'].readFileSync(temp).toString('utf-8');
         var data = new _parser.Parser().parse(output);
+        data.command = UNITY_PATH + ' ' + args.join(' ');
         if (data.success) {
           if (_this.options.debug) {
             for (var i = 0; i < data.debug.length; ++i) {
@@ -130,7 +133,7 @@ var UnityPlugin = (function (_Plugin) {
           for (var i = 0; i < data.stderr.length; ++i) {
             console.log(_this.options.color ? data.stderr[i].red : data.stderr[i]);
           }
-          callback(new _gulpUtil2['default'].PluginError(_this.name, "Failed to invoke batch mode", { fileName: file.path }));
+          callback(new _gulpUtil2['default'].PluginError(_this.name, 'Failed to invoke batch mode: ' + data.command, { fileName: file.path }));
         }
       });
     }

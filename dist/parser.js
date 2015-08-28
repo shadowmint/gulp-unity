@@ -53,6 +53,7 @@ var Parser = (function () {
       var token = [];
       var token_is_debug = false;
       var debug_has_started = false;
+      var in_failure_block = 0;
 
       var rtn = {
         stdout: [],
@@ -101,12 +102,14 @@ var Parser = (function () {
           // Check for failure
           if (line.match(this.failure)) {
             rtn.success = false;
+            in_failure_block = 3;
           }
 
           // Add output if required
           if (this.state == State.STDOUT) {
             rtn.stdout.push(line);
-          } else if (this.state == State.STDERR) {
+          } else if (this.state == State.STDERR || in_failure_block > 0) {
+            --in_failure_block;
             rtn.stderr.push(line);
           }
         }

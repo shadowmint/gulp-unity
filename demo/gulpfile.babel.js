@@ -1,7 +1,19 @@
 var unity = require('../index');
+var run = require('run-sequence');
 var gulp = require('gulp');
 
 gulp.task('default', function(callback) {
+  run('good', 'bad', callback);
+});
+
+gulp.task('bad', function(callback) {
+  return gulp.src('./project/README.md')
+    .pipe(unity({
+      method: 'TestRunner.Run.Missing'
+    }));
+});
+
+gulp.task('good', function(callback) {
   return gulp.src('./project/README.md')
     .pipe(unity({
       method: 'TestRunner.Run',
