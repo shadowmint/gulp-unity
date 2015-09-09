@@ -61,7 +61,7 @@ class UnityPlugin extends Plugin {
 
     // Configure settings
     var root = file.base;
-    var args = ['-batchmode', '-quit', '-logFile', temp, '-projectPath', root, '-executeMethod', this.options.method]
+    var args = ['-batchmode', '-nographics', '-quit', '-logFile', temp, '-projectPath', root, '-executeMethod', this.options.method]
     if (this.options.args.length) {
       args = args.concat(this.options.args);
     }
