@@ -6,6 +6,7 @@ gulp.task('default', function(callback) {
   run('good', 'bad', callback);
 });
 
+// This task should deliberately generate an error
 gulp.task('bad', function(callback) {
   return gulp.src('./project/README.md')
     .pipe(unity({
@@ -13,6 +14,7 @@ gulp.task('bad', function(callback) {
     }));
 });
 
+// This should work
 gulp.task('good', function(callback) {
   return gulp.src('./project/README.md')
     .pipe(unity({
