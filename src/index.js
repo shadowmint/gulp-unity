@@ -6,7 +6,7 @@ import tmp from 'tmp';
 import gutil from 'gulp-util';
 import * as sutils from 'gulp-tools/lib/utils';
 import {Plugin} from 'gulp-tools';
-import {Parser} from './parser';
+import {UnityOutput} from './unity';
 
 class UnityPlugin extends Plugin {
 
@@ -69,64 +69,31 @@ class UnityPlugin extends Plugin {
     // Spawn a process to invoke unity
     var proc = cp.spawn(UNITY_PATH, args);
     proc.on('exit', () => {
+
+      // Read output and parse it
       var output = fs.readFileSync(temp).toString('utf-8');
-      var data = new Parser().parse(output);
-      data.command = UNITY_PATH + ' ' + args.join(' ');
+      var command = UNITY_PATH + ' ' + args.join(' ');
+      var data = new UnityOutput(command, output);
       if (data.success) {
+
+        // Run debug handler, if any
         if (this.options.debug) {
-          for (var i = 0; i < data.debug.length; ++i) {
-            this.options.debug(data.debug[i]);
-          }
+          this.options.debug(data);
         }
-        file.contents = new Buffer(JSON.stringify(data.debug));
+
+        // Return raw output to gulp
+        file.contents = new Buffer(JSON.stringify(output));
         callback(null, file);
       }
+
+      // On failure, print errors and raise an error
       else {
-        for (var i = 0; i < data.stdout.length; ++i) {
-          console.log(this.options.color ? data.stdout[i].yellow : data.stdout[i]);
-        }
-        for (var i = 0; i < data.stderr.length; ++i) {
-          console.log(this.options.color ? data.stderr[i].red : data.stderr[i]);
-        }
+        data.errors();
         callback(new gutil.PluginError(this.name, `Failed to invoke batch mode: ${data.command}`, {fileName: file.path}));
       }
     });
   }
-
-  /**
-   * Debugging helper
-   * For each pattern and color pairs in the form: { pattern: /.../, color: 'green' }
-   * If the non-debug info of a debug line matches pattern, log it with color
-   * @param record A debug record
-   * @param patterns An array of {pattern: //, color: ''}
-   */
-  static debug(record, patterns) {
-    var end_of_input = /^UnityEngine.Debug.*/;
-    for (var i = 0; i < record.length; ++i) {
-      if (record[i].match(end_of_input)) {
-        break;
-      }
-      for (var j = 0; j < patterns.length; ++j) {
-        if (record[i].match(patterns[j].pattern)) {
-          console.log(patterns[j].color ? record[i][patterns[j].color] : record[i]);
-          if (patterns[j].context === true) {
-            for (var k = i + 1; k < record.length; ++k) {
-              console.log(patterns[j].color ? record[k][patterns[j].color] : record[k]);
-            }
-          }
-          if (patterns[j].context) {
-            for (var k = i + 1; (k < record.length) && (k < (i + patterns[j].context + 1)); ++k) {
-              console.log(patterns[j].color ? record[k][patterns[j].color] : record[k]);
-            }
-          }
-          break;
-        }
-      }
-    }
-  }
 }
 
 var rtn = new UnityPlugin().handler();
-rtn.debug = UnityPlugin.debug;
-
 export default rtn;

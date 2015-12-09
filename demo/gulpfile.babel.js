@@ -1,6 +1,6 @@
-var unity = require('../index');
-var run = require('run-sequence');
-var gulp = require('gulp');
+import unity from '../index';
+import run from 'run-sequence';
+import gulp from 'gulp';
 
 gulp.task('default', function(callback) {
   run('good', 'bad', callback);
@@ -20,13 +20,13 @@ gulp.task('good', function(callback) {
     .pipe(unity({
       method: 'TestRunner.Run',
       debug: (v) => {
-        unity.debug(v, [
+        v.debug([
           { pattern: /\*\* Test.*/, color: 'green' },
           { pattern: /\!\! Test.*/, color: 'red' },
           { pattern: /\*.*/ },
           { pattern: /^DEBUG:.*/, color: 'yellow', context: 3 },
           { pattern: /System.Exception/, color: 'red', context: true },
-        ])
+        ]);
       }
     }));
 });
