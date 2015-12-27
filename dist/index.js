@@ -206,10 +206,17 @@ function debug_test_results(target) {
             var testcase = result['test-case'][ckey];
             if (testcase.$.success == 'True') {
               console.log((testcase['$']['name'] + ' - ' + testcase['$']['result']).green);
+            } else if (testcase.$.executed == 'False') {
+              console.log((testcase['$']['name'] + ' - ' + testcase['$']['result']).yellow);
+              console.log(testcase.reason[0].message[0]);
             } else {
               console.log((testcase['$']['name'] + ' - ' + testcase['$']['result']).red);
-              console.log(testcase.failure[0].message[0]);
-              console.log(testcase.failure[0]['stack-trace'][0]);
+              try {
+                console.log(testcase.failure[0].message[0]);
+                console.log(testcase.failure[0]['stack-trace'][0]);
+              } catch (err) {
+                console.log(testcase);
+              }
             }
           }
         }
