@@ -81,8 +81,21 @@ var UnityPlugin = (function (_Plugin) {
       this.option('paths', ['C:\\Program Files\\Unity\\Editor\\Unity.exe', '/Applications/Unity/Unity.app/Contents/MacOS/Unity']);
 
       // The method to invoke on the projects.
+      // Null for none
       this.option('method', null, function (v) {
-        return v != null;
+        return true;
+      });
+
+      // Use the -quit option to exit after we're done
+      // Only turn this off for odd modes like test runners
+      this.option('quit', true, function (v) {
+        return true;
+      });
+
+      /// Use the -nographics option to speed up runtime
+      /// Only turn this on if there's a good reason, eg. lighting calc
+      this.option('nographics', true, function (v) {
+        return true;
       });
 
       // Pass additional command line arguments?
@@ -122,7 +135,16 @@ var UnityPlugin = (function (_Plugin) {
 
       // Configure settings
       var root = file.base;
-      var args = ['-batchmode', '-nographics', '-quit', '-logFile', temp, '-projectPath', root, '-executeMethod', this.options.method];
+      var args = ['-batchmode', '-logFile', temp, '-projectPath', root];
+      if (this.options.quit) {
+        args.push('-quit');
+      }
+      if (this.options.nographics) {
+        args.push('-nographics');
+      }
+      if (this.options.method) {
+        args.concat(['-executeMethod', this.options.method]);
+      }
       if (this.options.args.length) {
         args = args.concat(this.options.args);
       }

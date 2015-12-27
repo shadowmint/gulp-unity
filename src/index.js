@@ -22,9 +22,16 @@ class UnityPlugin extends Plugin {
     ]);
 
     // The method to invoke on the projects.
-    this.option('method', null, (v) => {
-      return v != null;
-    });
+    // Null for none
+    this.option('method', null, (v) => { return true; });
+
+    // Use the -quit option to exit after we're done
+    // Only turn this off for odd modes like test runners
+    this.option('quit', true, (v) => { return true; });
+
+    /// Use the -nographics option to speed up runtime
+    /// Only turn this on if there's a good reason, eg. lighting calc
+    this.option('nographics', true, (v) => { return true; });
 
     // Pass additional command line arguments?
     this.option('color', true);
@@ -61,7 +68,16 @@ class UnityPlugin extends Plugin {
 
     // Configure settings
     var root = file.base;
-    var args = ['-batchmode', '-nographics', '-quit', '-logFile', temp, '-projectPath', root, '-executeMethod', this.options.method]
+    var args = ['-batchmode', '-logFile', temp, '-projectPath', root];
+    if (this.options.quit) {
+      args.push('-quit');
+    }
+    if (this.options.nographics) {
+      args.push('-nographics');
+    }
+    if (this.options.method) {
+      args.concat(['-executeMethod', this.options.method]);
+    }
     if (this.options.args.length) {
       args = args.concat(this.options.args);
     }
