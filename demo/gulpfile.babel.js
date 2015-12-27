@@ -1,9 +1,10 @@
 import unity from '../index';
 import run from 'run-sequence';
 import gulp from 'gulp';
+import path from 'path';
 
 gulp.task('default', function(callback) {
-  run('good', 'bad', callback);
+  run('good', 'bad', 'tests', callback);
 });
 
 // This task should deliberately generate an error
@@ -26,6 +27,28 @@ gulp.task('good', function(callback) {
           { pattern: /\*.*/ },
           { pattern: /^DEBUG:.*/, color: 'yellow', context: 3 },
           { pattern: /System.Exception/, color: 'red', context: true },
+        ]);
+      }
+    }));
+});
+
+// Run tests, then print debug results
+gulp.task('tests', function(callback) {
+  run('unity-tests', function() {
+    unity.debug_test_results(path.join(__dirname, 'project/EditorTestResults.xml'));
+    callback();
+  });
+});
+
+// Run tests, then print debug results
+gulp.task('unity-tests', function(callback) {
+  return gulp.src('./project/README.md')
+    .pipe(unity({
+      quit: false,
+      args: ['-runEditorTests'],
+      debug: (v) => {
+        v.debug([
+          { pattern: /.*/, color: 'yellow' }
         ]);
       }
     }));

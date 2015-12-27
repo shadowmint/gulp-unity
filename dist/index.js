@@ -60,6 +60,10 @@ var _gulpTools = require('gulp-tools');
 
 var _unity = require('./unity');
 
+var _xml2js = require('xml2js');
+
+var _xml2js2 = _interopRequireDefault(_xml2js);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -180,5 +184,40 @@ var UnityPlugin = (function (_Plugin) {
   return UnityPlugin;
 })(_gulpTools.Plugin);
 
+/**
+ * Helper function to report output to the command line.
+ * Use a real nunit parser; this is just for debugging.
+ */
+
+function debug_test_results(target) {
+  var parser = new _xml2js2.default.Parser();
+  _fs2.default.readFile(target, function (err, data) {
+    parser.parseString(data, function (err, result) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      var suites = result['test-results']['test-suite'];
+      for (var skey in suites) {
+        var suite = suites[skey];
+        for (var rkey in suite['results']) {
+          var result = suite['results'][rkey];
+          for (var ckey in result['test-case']) {
+            var testcase = result['test-case'][ckey];
+            if (testcase.$.success == 'True') {
+              console.log((testcase['$']['name'] + ' - ' + testcase['$']['result']).green);
+            } else {
+              console.log((testcase['$']['name'] + ' - ' + testcase['$']['result']).red);
+              console.log(testcase.failure[0].message[0]);
+              console.log(testcase.failure[0]['stack-trace'][0]);
+            }
+          }
+        }
+      }
+    });
+  });
+}
+
 var rtn = new UnityPlugin().handler();
+rtn.debug_test_results = debug_test_results;
 exports.default = rtn;
