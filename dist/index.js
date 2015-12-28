@@ -190,37 +190,47 @@ var UnityPlugin = (function (_Plugin) {
  */
 
 function debug_test_results(target) {
-  var parser = new _xml2js2.default.Parser();
-  _fs2.default.readFile(target, function (err, data) {
-    parser.parseString(data, function (err, result) {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      var suites = result['test-results']['test-suite'];
-      for (var skey in suites) {
-        var suite = suites[skey];
-        for (var rkey in suite['results']) {
-          var result = suite['results'][rkey];
-          for (var ckey in result['test-case']) {
-            var testcase = result['test-case'][ckey];
-            if (testcase.$.success == 'True') {
-              console.log((testcase['$']['name'] + ' - ' + testcase['$']['result']).green);
-            } else if (testcase.$.executed == 'False') {
-              console.log((testcase['$']['name'] + ' - ' + testcase['$']['result']).yellow);
-              console.log(testcase.reason[0].message[0]);
-            } else {
-              console.log((testcase['$']['name'] + ' - ' + testcase['$']['result']).red);
-              try {
-                console.log(testcase.failure[0].message[0]);
-                console.log(testcase.failure[0]['stack-trace'][0]);
-              } catch (err) {
-                console.log(testcase);
+  _fs2.default.access(target, _fs2.default.R_OK, function (err) {
+    if (err) {
+      console.log('No test results found at: ' + target);
+      console.log(err);
+      return;
+    }
+
+    // Best attempt at parsing the xml
+    // Really, use a proper nunint parser; this is just for testing.
+    var parser = new _xml2js2.default.Parser();
+    _fs2.default.readFile(target, function (err, data) {
+      parser.parseString(data, function (err, result) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        var suites = result['test-results']['test-suite'];
+        for (var skey in suites) {
+          var suite = suites[skey];
+          for (var rkey in suite['results']) {
+            var result = suite['results'][rkey];
+            for (var ckey in result['test-case']) {
+              var testcase = result['test-case'][ckey];
+              if (testcase.$.success == 'True') {
+                console.log((testcase['$']['name'] + ' - ' + testcase['$']['result']).green);
+              } else if (testcase.$.executed == 'False') {
+                console.log((testcase['$']['name'] + ' - ' + testcase['$']['result']).yellow);
+                console.log(testcase.reason[0].message[0]);
+              } else {
+                console.log((testcase['$']['name'] + ' - ' + testcase['$']['result']).red);
+                try {
+                  console.log(testcase.failure[0].message[0]);
+                  console.log(testcase.failure[0]['stack-trace'][0]);
+                } catch (err) {
+                  console.log(testcase);
+                }
               }
             }
           }
         }
-      }
+      });
     });
   });
 }

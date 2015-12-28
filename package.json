@@ -26,8 +26,9 @@
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.3.13",
+    "gulp": "^3.9.0",
     "gulp-babel": "^6.1.1",
-    "gulp-nodeunit": "shadowmint/gulp-nodeunit#0.0.3",
+    "gulp-nodeunit": "shadowmint/gulp-nodeunit#0.0.4",
     "run-sequence": "^1.1.1"
   }
 }
