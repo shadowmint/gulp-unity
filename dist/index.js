@@ -89,7 +89,6 @@ var UnityPlugin = function (_Plugin) {
       // from it. This is so you can gitignore .unitypath files.
       // These values are \n separated and take precidence.
       paths = this.load_additional_paths().concat(paths);
-      console.log(paths);
 
       // Save paths option
       this.option('paths', paths);
