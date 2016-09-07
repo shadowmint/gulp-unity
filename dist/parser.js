@@ -41,7 +41,7 @@ var BlockPatterns = exports.BlockPatterns = {
 
 /** Unity output parser */
 
-var Parser = exports.Parser = (function () {
+var Parser = exports.Parser = function () {
   function Parser() {
     (0, _classCallCheck3.default)(this, Parser);
 
@@ -52,6 +52,7 @@ var Parser = exports.Parser = (function () {
    * Parse unity output
    * @return Itself, so you can .parse().filter(...)
    */
+
 
   (0, _createClass3.default)(Parser, [{
     key: 'parse',
@@ -116,8 +117,8 @@ var Parser = exports.Parser = (function () {
           merged.push(this.blocks[i]);
           i += 1; // Skip~
         } else {
-            merged.push(this.blocks[i]);
-          }
+          merged.push(this.blocks[i]);
+        }
       }
       this.blocks = merged;
     }
@@ -218,11 +219,12 @@ var Parser = exports.Parser = (function () {
     }
   }]);
   return Parser;
-})();
+}();
 
 /** Some block of content */
 
-var Block = (function () {
+
+var Block = function () {
   function Block() {
     (0, _classCallCheck3.default)(this, Block);
 
@@ -237,6 +239,7 @@ var Block = (function () {
    * Add a line to this block
    * @return false if we have completed a block
    */
+
 
   (0, _createClass3.default)(Block, [{
     key: 'push',
@@ -302,4 +305,4 @@ var Block = (function () {
     }
   }]);
   return Block;
-})();
+}();

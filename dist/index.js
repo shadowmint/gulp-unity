@@ -68,12 +68,12 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var UnityPlugin = (function (_Plugin) {
+var UnityPlugin = function (_Plugin) {
   (0, _inherits3.default)(UnityPlugin, _Plugin);
 
   function UnityPlugin() {
     (0, _classCallCheck3.default)(this, UnityPlugin);
-    return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(UnityPlugin).call(this, 'gulp-unity'));
+    return (0, _possibleConstructorReturn3.default)(this, (UnityPlugin.__proto__ || (0, _getPrototypeOf2.default)(UnityPlugin)).call(this, 'gulp-unity'));
   }
 
   (0, _createClass3.default)(UnityPlugin, [{
@@ -81,8 +81,18 @@ var UnityPlugin = (function (_Plugin) {
     value: function configure(options) {
       this.options = options ? options : {};
 
-      // The set of paths to try to find the unity executable
-      this.option('paths', ['C:\\Program Files\\Unity\\Editor\\Unity.exe', '/Applications/Unity/Unity.app/Contents/MacOS/Unity']);
+      // The default set of paths to try to find the unity executable
+      var paths = ['C:\\Program Files\\Unity\\Editor\\Unity.exe', '/Applications/Unity/Unity.app/Contents/MacOS/Unity'];
+
+      // As a shortcut to modifying the gulpfile, if you define a .unitypath
+      // file in the folder where the gulpfile is, load additional paths
+      // from it. This is so you can gitignore .unitypath files.
+      // These values are \n separated and take precidence.
+      paths = this.load_additional_paths().concat(paths);
+      console.log(paths);
+
+      // Save paths option
+      this.option('paths', paths);
 
       // The method to invoke on the projects.
       // Null for none
@@ -112,6 +122,20 @@ var UnityPlugin = (function (_Plugin) {
       this.option('debug', false, function (v) {
         return v === false || typeof v === 'function';
       });
+    }
+  }, {
+    key: 'load_additional_paths',
+    value: function load_additional_paths() {
+      var source = _path2.default.join(process.cwd(), '.unitypath');
+      try {
+        var content = _fs2.default.readFileSync(source).toString();
+        return content.split('\n').map(function (i) {
+          return i.trim();
+        }).filter(function (i) {
+          return i != '';
+        });
+      } catch (error) {}
+      return [];
     }
   }, {
     key: 'handle_string',
@@ -182,12 +206,13 @@ var UnityPlugin = (function (_Plugin) {
     }
   }]);
   return UnityPlugin;
-})(_gulpTools.Plugin);
+}(_gulpTools.Plugin);
 
 /**
  * Helper function to report output to the command line.
  * Use a real nunit parser; this is just for debugging.
  */
+
 
 function debug_test_results(target) {
   _fs2.default.access(target, _fs2.default.R_OK, function (err) {

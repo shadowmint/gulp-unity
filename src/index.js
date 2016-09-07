@@ -16,11 +16,21 @@ class UnityPlugin extends Plugin {
   configure(options) {
     this.options = options ? options : {};
 
-    // The set of paths to try to find the unity executable
-    this.option('paths', [
+    // The default set of paths to try to find the unity executable
+    var paths = [
       'C:\\Program Files\\Unity\\Editor\\Unity.exe',
       '/Applications/Unity/Unity.app/Contents/MacOS/Unity'
-    ]);
+    ];
+
+    // As a shortcut to modifying the gulpfile, if you define a .unitypath
+    // file in the folder where the gulpfile is, load additional paths
+    // from it. This is so you can gitignore .unitypath files.
+    // These values are \n separated and take precidence.
+    paths = this.load_additional_paths().concat(paths);
+    console.log(paths);
+
+    // Save paths option
+    this.option('paths', paths);
 
     // The method to invoke on the projects.
     // Null for none
@@ -44,6 +54,17 @@ class UnityPlugin extends Plugin {
     this.option('debug', false, (v) => {
       return (v === false) || (typeof(v) === 'function');
     });
+  }
+
+  load_additional_paths() {
+    var source = path.join(process.cwd(), '.unitypath');
+    try {
+      var content = fs.readFileSync(source).toString();
+      return content.split('\n').map((i) => { return i.trim(); }).filter((i) => { return i != ''; });
+    }
+    catch(error) {
+    }
+    return [];
   }
 
   handle_string(file, value, callback) {

@@ -22,11 +22,9 @@ var _colors2 = _interopRequireDefault(_colors);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /** High level unity output handler */
-
-var UnityOutput = exports.UnityOutput = (function () {
+var UnityOutput = exports.UnityOutput = function () {
 
   /** Create a new instance and parse that output */
-
   function UnityOutput(command, raw) {
     (0, _classCallCheck3.default)(this, UnityOutput);
 
@@ -37,6 +35,7 @@ var UnityOutput = exports.UnityOutput = (function () {
   }
 
   /** Print errors */
+
 
   (0, _createClass3.default)(UnityOutput, [{
     key: 'errors',
@@ -102,4 +101,4 @@ var UnityOutput = exports.UnityOutput = (function () {
     }
   }]);
   return UnityOutput;
-})();
+}();
