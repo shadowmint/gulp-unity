@@ -7,7 +7,7 @@ Notice that this wont work if unity is already open; just use it for automation.
 ## Install
 
 ```
-$ npm install --save-dev shadowmint/gulp-unity#0.0.1
+$ npm install --save-dev shadowmint/gulp-unity
 ```
 
 ## Usage
@@ -35,6 +35,16 @@ gulp.task('default', function(callback) {
     }));
 })
 ```
+
+It's so frequent that there's some special location to the unity binary
+that a special option is available to support this. As shown in the `demo`
+folder, create a file called '.unitypath' in root folder.
+
+Each file of this file is treated as a search path to check for the unity
+binary, so you can easily configure automation to run in multiple places 
+with a single gulp file. 
+
+This is simply a shortcut for the 'paths' option as specified below.
 
 ## Required options
 

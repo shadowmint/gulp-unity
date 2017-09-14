@@ -44,9 +44,9 @@ gulp.task('tests', function(callback) {
 gulp.task('unity-tests', function(callback) {
   return gulp.src('./project/README.md')
     .pipe(unity({
-      quit: false,
       args: ['-runEditorTests'],
       debug: (v) => {
+        console.log(v);
         v.debug([
           { pattern: /.*/, color: 'yellow' }
         ]);

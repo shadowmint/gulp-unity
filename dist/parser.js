@@ -37,10 +37,9 @@ var BlockPatterns = exports.BlockPatterns = {
   ERROR: /^-----CompilerOutput:-stdout--exitcode: 1.*/,
   EXIT: /^Aborting batchmode due to failure:.*/,
   FILENAME: /^\(Filename: (.*) Line: (.*)\)/
+
+  /** Unity output parser */
 };
-
-/** Unity output parser */
-
 var Parser = exports.Parser = function () {
   function Parser() {
     (0, _classCallCheck3.default)(this, Parser);
@@ -171,7 +170,7 @@ var Parser = exports.Parser = function () {
 
   }, {
     key: 'lines',
-    value: _regenerator2.default.mark(function lines(raw) {
+    value: /*#__PURE__*/_regenerator2.default.mark(function lines(raw) {
       var lines, i, line;
       return _regenerator2.default.wrap(function lines$(_context) {
         while (1) {

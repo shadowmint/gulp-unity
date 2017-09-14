@@ -99,9 +99,9 @@ var UnityPlugin = function (_Plugin) {
         return true;
       });
 
-      // Use the -quit option to exit after we're done
-      // Only turn this off for odd modes like test runners
-      this.option('quit', true, function (v) {
+      // As of unity 2017 setting this option to true prevents tests.
+      // It therefore has no purpose; but feel free to set it to whatever.
+      this.option('quit', false, function (v) {
         return true;
       });
 
@@ -162,7 +162,7 @@ var UnityPlugin = function (_Plugin) {
 
       // Configure settings
       var root = file.base;
-      var args = ['-batchmode', '-logFile', temp, '-projectPath', root];
+      var args = ['-batchmode', '-logFile', temp, '-projectPath', root, '-editorTestsResultFile', 'EditorTestResults.xml'];
       if (this.options.quit) {
         args.push('-quit');
       }
@@ -177,6 +177,10 @@ var UnityPlugin = function (_Plugin) {
       }
 
       // Spawn a process to invoke unity
+      if (this.options.debug) {
+        console.log(UNITY_PATH + " " + args.join(" "));
+      }
+
       var proc = _child_process2.default.spawn(UNITY_PATH, args);
       proc.on('exit', function () {
 

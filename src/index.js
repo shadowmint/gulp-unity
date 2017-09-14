@@ -35,9 +35,9 @@ class UnityPlugin extends Plugin {
     // Null for none
     this.option('method', null, (v) => { return true; });
 
-    // Use the -quit option to exit after we're done
-    // Only turn this off for odd modes like test runners
-    this.option('quit', true, (v) => { return true; });
+    // As of unity 2017 setting this option to true prevents tests.
+    // It therefore has no purpose; but feel free to set it to whatever.
+    this.option('quit', false, (v) => { return true; });
 
     /// Use the -nographics option to speed up runtime
     /// Only turn this on if there's a good reason, eg. lighting calc
@@ -89,7 +89,7 @@ class UnityPlugin extends Plugin {
 
     // Configure settings
     var root = file.base;
-    var args = ['-batchmode', '-logFile', temp, '-projectPath', root];
+    var args = ['-batchmode', '-logFile', temp, '-projectPath', root, '-editorTestsResultFile', 'EditorTestResults.xml'];
     if (this.options.quit) {
       args.push('-quit');
     }
@@ -104,6 +104,10 @@ class UnityPlugin extends Plugin {
     }
 
     // Spawn a process to invoke unity
+    if (this.options.debug) {
+      console.log(UNITY_PATH + " " + args.join(" "));
+    }
+
     var proc = cp.spawn(UNITY_PATH, args);
     proc.on('exit', () => {
 
